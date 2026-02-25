@@ -10,7 +10,7 @@ import {
 import DailyLogModal from "./DailyLogModal";
 import HabitTracker from "./HabitTracker";
 
-export default function Dashboard({ dailyData, onLogDay, onRemoveDay, onLogout }) {
+export default function Dashboard({ dailyData, onLogDay, onToggleDay, onLogout }) {
     const [showLogModal, setShowLogModal] = useState(false);
     const [selectedPhase, setSelectedPhase] = useState(null);
 
@@ -63,20 +63,13 @@ export default function Dashboard({ dailyData, onLogDay, onRemoveDay, onLogout }
 
     const quote = MOTIVATIONAL_QUOTES[currentDay % MOTIVATIONAL_QUOTES.length];
 
-    const getCalendarLevel = (day) => {
-        const d = dailyData.find((x) => x.day === day.day);
-        if (!d) return "empty";
-        if (!d.completed) return "level-0";
-        if (d.minutesStudied < 15) return "level-1";
-        if (d.minutesStudied < 30) return "level-2";
-        if (d.minutesStudied < 45) return "level-3";
-        return "level-4";
-    };
-
-    const calendarDays = Array.from({ length: 90 }, (_, i) => ({
-        day: i + 1,
-        filled: i < currentDay,
-    }));
+    const calendarDays = Array.from({ length: 90 }, (_, i) => {
+        const d = dailyData.find(x => x.day === i + 1);
+        return {
+            day: i + 1,
+            filled: !!d
+        };
+    });
 
     const activePhaseForTopics = selectedPhase || currentPhase;
     const activeWeekData = activePhaseForTopics.weeks.find(
@@ -98,7 +91,7 @@ export default function Dashboard({ dailyData, onLogDay, onRemoveDay, onLogout }
             {/* Top Navigation */}
             <nav className="top-nav">
                 <div className="nav-left">
-                    <span className="nav-logo">🎯 SpanishTracker</span>
+                    <span className="nav-logo">🎯 Roadmap</span>
                     <span className="nav-divider" />
                     <span
                         className="nav-phase-badge"
@@ -123,12 +116,25 @@ export default function Dashboard({ dailyData, onLogDay, onRemoveDay, onLogout }
             </nav>
 
             <div className="dashboard-content">
-                {/* ========== HABIT TRACKER — AT THE TOP ========== */}
-                <HabitTracker
-                    currentDay={currentDay}
-                    currentPhase={currentPhase}
-                    currentWeek={currentWeek}
-                />
+                {/* 90-Day Tracker Moved to the TOP */}
+                <div className="card" style={{ marginBottom: "var(--space-xl)" }}>
+                    <div className="card-header">
+                        <div>
+                            <h3 className="card-title">🗓️ 90-Day Activity Roadmap</h3>
+                            <span className="card-subtitle">Click any day to instantly log or remove your progress</span>
+                        </div>
+                    </div>
+                    <div className="activity-calendar">
+                        {calendarDays.map((cd) => (
+                            <div
+                                key={cd.day}
+                                className={`calendar-cell ${cd.filled ? "completed" : "empty"}`}
+                                title={`Day ${cd.day}`}
+                                onClick={() => onToggleDay(cd.day)}
+                            />
+                        ))}
+                    </div>
+                </div>
 
                 {/* Quote Banner */}
                 <div className="quote-banner">
@@ -359,40 +365,6 @@ export default function Dashboard({ dailyData, onLogDay, onRemoveDay, onLogout }
                         </div>
                     </div>
 
-                    {/* Activity Heatmap */}
-                    <div className="card">
-                        <div className="card-header">
-                            <div>
-                                <h3 className="card-title">🗓️ 90-Day Activity</h3>
-                                <span className="card-subtitle">Your consistency heatmap</span>
-                            </div>
-                        </div>
-                        <div className="activity-calendar">
-                            {calendarDays.map((cd) => (
-                                <div
-                                    key={cd.day}
-                                    className={`calendar-cell ${getCalendarLevel(cd)}`}
-                                    title={`Day ${cd.day}${cd.filled ? "" : " (upcoming)"}`}
-                                    onClick={() => {
-                                        if (cd.filled) {
-                                            // Do nothing for filled days to avoid annoying modal
-                                        } else if (cd.day === currentDay + 1) {
-                                            setShowLogModal(true);
-                                        }
-                                    }}
-                                />
-                            ))}
-                        </div>
-                        <div className="calendar-legend">
-                            <span>Less</span>
-                            <div className="legend-cell" style={{ background: "rgba(255,255,255,0.03)" }} />
-                            <div className="legend-cell" style={{ background: "rgba(99,102,241,0.2)" }} />
-                            <div className="legend-cell" style={{ background: "rgba(99,102,241,0.4)" }} />
-                            <div className="legend-cell" style={{ background: "rgba(99,102,241,0.6)" }} />
-                            <div className="legend-cell" style={{ background: "rgba(99,102,241,0.85)" }} />
-                            <span>More</span>
-                        </div>
-                    </div>
                 </div>
 
                 {/* Current Week & Routine */}

@@ -40,21 +40,14 @@ export default function Login({ onLogin, transitioning }) {
             <div className="login-center" style={{ maxWidth: "500px", margin: "0 auto", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: "100vh" }}>
                 {/* Top Section — Branding */}
                 <div className="login-brand" style={{ animationDelay: "0.1s" }}>
-                    <div className="brand-logo">
-                        <span className="brand-icon">🎯</span>
-                        <h1 className="brand-title">SpanishTracker</h1>
-                    </div>
-                    <p className="brand-tagline">Master Spanish in 90 Days</p>
+                    <h1 className="brand-title" style={{ fontSize: "2.5rem", letterSpacing: "-0.04em", color: "#fff", background: "none", WebkitTextFillColor: "#fff" }}>Welcome Back.</h1>
+                    <p className="brand-tagline" style={{ fontSize: "1.1rem", opacity: 0.7 }}>Sign in to continue your language journey</p>
                 </div>
 
                 {/* Right — Login Card (Now Centered) */}
                 <div className="login-card" style={{ animationDelay: "0.2s" }}>
                     <div className="login-card-glow" />
                     <div className="login-card-inner">
-                        <div className="login-card-header" style={{ textAlign: "center" }}>
-                            <h2>Welcome Back</h2>
-                            <p>Sign in to continue your progress</p>
-                        </div>
 
                         <form className="login-form" onSubmit={handleSubmit}>
                             <div className="form-group">

@@ -475,17 +475,19 @@ body {
   position: absolute;
   inset: -1px;
   border-radius: var(--radius-2xl);
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(167, 139, 250, 0.08), rgba(6, 182, 212, 0.1));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
   z-index: -1;
-  filter: blur(1px);
+  filter: blur(2px);
 }
 
 .login-card-inner {
-  padding: var(--space-xl) var(--space-lg);
-  background: rgba(12, 12, 18, 0.92);
+  padding: 48px;
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-2xl);
-  backdrop-filter: blur(24px);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .login-card-header {
@@ -543,15 +545,16 @@ body {
 .form-group input,
 .input-wrapper input {
   width: 100%;
-  padding: 13px 16px 13px 42px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: var(--radius-md);
+  padding: 16px 16px 16px 42px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-family: 'Inter', sans-serif;
   transition: all var(--transition-base);
   outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .form-group input:focus,
@@ -569,22 +572,23 @@ body {
 
 /* Login Button */
 .login-btn {
-  margin-top: var(--space-xs);
-  padding: 14px;
-  background: linear-gradient(135deg, #6366f1, #7c3aed, #6366f1);
-  background-size: 200% 200%;
-  animation: gradientShift 4s ease infinite;
+  margin-top: var(--space-md);
+  padding: 16px;
+  background: #fff;
+  color: #000;
   border: none;
-  border-radius: var(--radius-md);
-  color: white;
-  font-size: 0.95rem;
-  font-weight: 600;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 700;
   font-family: 'Inter', sans-serif;
   cursor: pointer;
-  transition: all var(--transition-base);
-  position: relative;
-  overflow: hidden;
-  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
 }
 
 @keyframes gradientShift {
@@ -1523,45 +1527,42 @@ body {
 /* Activity Calendar */
 .activity-calendar {
   display: grid;
-  grid-template-columns: repeat(13, 1fr);
-  gap: 4px;
+  grid-template-columns: repeat(15, 1fr);
+  gap: 8px;
 }
 
 .calendar-cell {
   aspect-ratio: 1;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: all var(--transition-fast);
   position: relative;
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .calendar-cell:hover {
-  transform: scale(1.3);
+  transform: scale(1.15);
   z-index: 2;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+  border-color: rgba(16, 185, 129, 0.5);
 }
 
 .calendar-cell.empty {
   background: rgba(255, 255, 255, 0.02);
 }
 
-.calendar-cell.level-0 {
-  background: rgba(255, 255, 255, 0.03);
+.calendar-cell.completed {
+  background: var(--accent-success);
+  /* #10b981 green */
+  border-color: rgba(16, 185, 129, 0.8);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.calendar-cell.level-1 {
-  background: rgba(99, 102, 241, 0.2);
-}
-
-.calendar-cell.level-2 {
-  background: rgba(99, 102, 241, 0.4);
-}
-
-.calendar-cell.level-3 {
-  background: rgba(99, 102, 241, 0.6);
-}
-
-.calendar-cell.level-4 {
-  background: rgba(99, 102, 241, 0.85);
+/* Make it pop when toggled on hover */
+.calendar-cell.completed:hover {
+  background: #059669;
+  border-color: #10b981;
 }
 
 .calendar-legend {

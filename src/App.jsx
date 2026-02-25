@@ -61,11 +61,27 @@ function App() {
     });
   };
 
-  const handleRemoveDay = (dayToDelete) => {
+  const handleToggleDay = (dayToToggle) => {
     setDailyData((prev) => {
-      const newData = prev.filter((d) => d.day !== dayToDelete);
-      const sorted = newData.sort((a, b) => a.day - b.day);
-      return calculateStreaks(sorted);
+      const exists = prev.find((d) => d.day === dayToToggle);
+      if (exists) {
+        // Toggle OFF (remove)
+        const newData = prev.filter((d) => d.day !== dayToToggle);
+        const sorted = newData.sort((a, b) => a.day - b.day);
+        return calculateStreaks(sorted);
+      } else {
+        // Toggle ON (add default log)
+        const phase = dayToToggle <= 30 ? "focus" : dayToToggle <= 60 ? "immersion" : "fluency";
+        const newData = [...prev, {
+          day: dayToToggle,
+          completed: true,
+          minutesStudied: 30,
+          vocabLearned: 10,
+          phase: phase
+        }];
+        const sorted = newData.sort((a, b) => a.day - b.day);
+        return calculateStreaks(sorted);
+      }
     });
   };
 
@@ -82,7 +98,7 @@ function App() {
     <Dashboard
       dailyData={dailyData}
       onLogDay={handleLogDay}
-      onRemoveDay={handleRemoveDay}
+      onToggleDay={handleToggleDay}
       onLogout={handleLogout}
     />
   );
