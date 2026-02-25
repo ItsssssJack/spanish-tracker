@@ -126,7 +126,7 @@ body {
   transition: opacity 1.5s ease;
 }
 
-.login-page.mounted .login-bg .orb {
+.mounted .login-bg .orb {
   opacity: 1;
 }
 
@@ -808,7 +808,7 @@ body {
 
 .dashboard {
   min-height: 100vh;
-  background: var(--bg-primary);
+  background: #050508;
   position: relative;
 }
 
@@ -954,8 +954,11 @@ body {
 
 .hero-stat-card {
   padding: var(--space-lg);
-  background: var(--gradient-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   border-radius: var(--radius-lg);
   transition: all var(--transition-base);
   position: relative;
@@ -989,9 +992,10 @@ body {
 }
 
 .hero-stat-card:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-medium);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
 }
 
 .hero-stat-label {
@@ -1032,15 +1036,19 @@ body {
 
 /* Card Base */
 .card {
-  background: var(--gradient-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
   transition: all var(--transition-base);
 }
 
 .card:hover {
-  border-color: var(--border-medium);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.1);
 }
 
 .card-header {
@@ -1061,10 +1069,12 @@ body {
   color: var(--text-muted);
 }
 
-/* Phase Cards */
 .phase-card {
-  background: var(--gradient-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
   position: relative;
@@ -1083,13 +1093,14 @@ body {
 }
 
 .phase-card.active {
-  border-color: var(--border-medium);
+  border-color: rgba(255, 255, 255, 0.15);
   box-shadow: var(--shadow-glow);
 }
 
 .phase-card:hover {
   transform: translateY(-4px);
-  border-color: var(--border-medium);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
 }
 
 .phase-card-header {
@@ -1162,13 +1173,22 @@ body {
    ============================================ */
 
 .habit-tracker {
-  background: var(--gradient-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
   margin-bottom: var(--space-xl);
   position: relative;
   overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.habit-tracker:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.1);
 }
 
 .habit-tracker::before {

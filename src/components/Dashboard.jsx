@@ -84,7 +84,15 @@ export default function Dashboard({ dailyData, onLogDay, onRemoveDay, onLogout }
     ) || activePhaseForTopics.weeks[0];
 
     return (
-        <div className="dashboard">
+        <div className="dashboard mounted">
+            {/* Animated Background Orbs */}
+            <div className="login-bg">
+                <div className="orb orb-1" />
+                <div className="orb orb-2" />
+                <div className="orb orb-3" />
+                <div className="grid-overlay" />
+            </div>
+
             <div className="dashboard-bg-pattern" />
 
             {/* Top Navigation */}
@@ -367,9 +375,7 @@ export default function Dashboard({ dailyData, onLogDay, onRemoveDay, onLogout }
                                     title={`Day ${cd.day}${cd.filled ? "" : " (upcoming)"}`}
                                     onClick={() => {
                                         if (cd.filled) {
-                                            if (window.confirm(`Are you sure you want to remove the log for Day ${cd.day}?`)) {
-                                                onRemoveDay(cd.day);
-                                            }
+                                            // Do nothing for filled days to avoid annoying modal
                                         } else if (cd.day === currentDay + 1) {
                                             setShowLogModal(true);
                                         }
