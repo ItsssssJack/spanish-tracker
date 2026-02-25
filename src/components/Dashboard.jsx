@@ -116,7 +116,11 @@ export default function Dashboard({ dailyData, onLogDay, onLogout }) {
 
             <div className="dashboard-content">
                 {/* ========== HABIT TRACKER — AT THE TOP ========== */}
-                <HabitTracker actualCurrentDay={currentDay} />
+                <HabitTracker
+                    currentDay={currentDay}
+                    currentPhase={currentPhase}
+                    currentWeek={currentWeek}
+                />
 
                 {/* Quote Banner */}
                 <div className="quote-banner">

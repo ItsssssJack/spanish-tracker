@@ -39,14 +39,16 @@ export default function Login({ onLogin, transitioning }) {
             {/* Center Container */}
             <div className="login-center" style={{ maxWidth: "500px", margin: "0 auto", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: "100vh" }}>
                 {/* Top Section — Branding */}
-                <div className="login-brand" style={{ animationDelay: "0.1s", textAlign: "center", marginBottom: "var(--space-2xl)" }}>
-                    <div className="brand-icon" style={{ fontSize: "3rem", marginBottom: "1rem" }}>🎯</div>
-                    <h1 className="brand-title" style={{ fontSize: "3rem" }}>SpanishTracker</h1>
-                    <p className="brand-tagline" style={{ fontSize: "1.2rem", marginTop: "0.5rem" }}>Master Spanish in 90 Days</p>
+                <div className="login-brand" style={{ animationDelay: "0.1s" }}>
+                    <div className="brand-logo">
+                        <span className="brand-icon">🎯</span>
+                        <h1 className="brand-title">SpanishTracker</h1>
+                    </div>
+                    <p className="brand-tagline">Master Spanish in 90 Days</p>
                 </div>
 
                 {/* Right — Login Card (Now Centered) */}
-                <div className="login-card" style={{ animationDelay: "0.2s", width: "100%" }}>
+                <div className="login-card" style={{ animationDelay: "0.2s" }}>
                     <div className="login-card-glow" />
                     <div className="login-card-inner">
                         <div className="login-card-header" style={{ textAlign: "center" }}>
