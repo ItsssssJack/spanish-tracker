@@ -10,7 +10,7 @@ import {
 import DailyLogModal from "./DailyLogModal";
 import HabitTracker from "./HabitTracker";
 
-export default function Dashboard({ dailyData, onLogDay, onLogout }) {
+export default function Dashboard({ dailyData, onLogDay, onRemoveDay, onLogout }) {
     const [showLogModal, setShowLogModal] = useState(false);
     const [selectedPhase, setSelectedPhase] = useState(null);
 
@@ -365,6 +365,15 @@ export default function Dashboard({ dailyData, onLogDay, onLogout }) {
                                     key={cd.day}
                                     className={`calendar-cell ${getCalendarLevel(cd)}`}
                                     title={`Day ${cd.day}${cd.filled ? "" : " (upcoming)"}`}
+                                    onClick={() => {
+                                        if (cd.filled) {
+                                            if (window.confirm(`Are you sure you want to remove the log for Day ${cd.day}?`)) {
+                                                onRemoveDay(cd.day);
+                                            }
+                                        } else if (cd.day === currentDay + 1) {
+                                            setShowLogModal(true);
+                                        }
+                                    }}
                                 />
                             ))}
                         </div>

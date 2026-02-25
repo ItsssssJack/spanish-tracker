@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
-import { generateMockData, DUMMY_CREDENTIALS } from "./data/learningPlan";
+import { DUMMY_CREDENTIALS } from "./data/learningPlan";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
   const [dailyData, setDailyData] = useState(() => {
     const saved = localStorage.getItem("spanishTrackerData");
-    return saved ? JSON.parse(saved) : generateMockData(18);
+    return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
@@ -34,6 +34,19 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  const calculateStreaks = (data) => {
+    let streak = 0;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].completed) {
+        streak++;
+      } else {
+        streak = 0;
+      }
+      data[i].streak = streak;
+    }
+    return data;
+  };
+
   const handleLogDay = (logEntry) => {
     setDailyData((prev) => {
       const newData = [...prev];
@@ -43,17 +56,16 @@ function App() {
       } else {
         newData.push(logEntry);
       }
-      // Recalculate streaks
-      let streak = 0;
-      for (let i = 0; i < newData.length; i++) {
-        if (newData[i].completed) {
-          streak++;
-        } else {
-          streak = 0;
-        }
-        newData[i].streak = streak;
-      }
-      return newData.sort((a, b) => a.day - b.day);
+      const sorted = newData.sort((a, b) => a.day - b.day);
+      return calculateStreaks(sorted);
+    });
+  };
+
+  const handleRemoveDay = (dayToDelete) => {
+    setDailyData((prev) => {
+      const newData = prev.filter((d) => d.day !== dayToDelete);
+      const sorted = newData.sort((a, b) => a.day - b.day);
+      return calculateStreaks(sorted);
     });
   };
 
@@ -70,6 +82,7 @@ function App() {
     <Dashboard
       dailyData={dailyData}
       onLogDay={handleLogDay}
+      onRemoveDay={handleRemoveDay}
       onLogout={handleLogout}
     />
   );
