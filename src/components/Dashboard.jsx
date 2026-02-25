@@ -115,6 +115,9 @@ export default function Dashboard({ dailyData, onLogDay, onLogout }) {
             </nav>
 
             <div className="dashboard-content">
+                {/* ========== HABIT TRACKER — AT THE TOP ========== */}
+                <HabitTracker actualCurrentDay={currentDay} />
+
                 {/* Quote Banner */}
                 <div className="quote-banner">
                     <p className="quote-text">"{quote.text}"</p>
@@ -167,15 +170,6 @@ export default function Dashboard({ dailyData, onLogDay, onLogout }) {
                         </div>
                     </div>
                 </div>
-
-                {/* ========== HABIT TRACKER — FRONT & CENTER ========== */}
-                <HabitTracker
-                    currentDay={currentDay}
-                    currentPhase={currentPhase}
-                    currentWeek={currentWeek}
-                />
-
-                {/* Phase Cards */}
                 <div className="section-header">
                     <h2>Learning Phases</h2>
                     <p>Click a phase to explore its curriculum and track progress</p>

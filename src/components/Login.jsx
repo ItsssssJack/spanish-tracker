@@ -37,161 +37,93 @@ export default function Login({ onLogin, transitioning }) {
             </div>
 
             {/* Center Container */}
-            <div className="login-center">
+            <div className="login-center" style={{ maxWidth: "500px", margin: "0 auto", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: "100vh" }}>
                 {/* Top Section — Branding */}
-                <div className="login-brand" style={{ animationDelay: "0.1s" }}>
-                    <div className="brand-icon">🎯</div>
-                    <h1 className="brand-title">SpanishTracker</h1>
-                    <p className="brand-tagline">Master Spanish in 90 Days</p>
+                <div className="login-brand" style={{ animationDelay: "0.1s", textAlign: "center", marginBottom: "var(--space-2xl)" }}>
+                    <div className="brand-icon" style={{ fontSize: "3rem", marginBottom: "1rem" }}>🎯</div>
+                    <h1 className="brand-title" style={{ fontSize: "3rem" }}>SpanishTracker</h1>
+                    <p className="brand-tagline" style={{ fontSize: "1.2rem", marginTop: "0.5rem" }}>Master Spanish in 90 Days</p>
                 </div>
 
-                {/* Main Content — Two Columns */}
-                <div className="login-main">
-                    {/* Left — Plan Overview */}
-                    <div className="login-plan" style={{ animationDelay: "0.2s" }}>
-                        <div className="plan-header">
-                            <span className="plan-badge">
-                                <span className="pulse-dot" />
-                                90-Day Challenge
-                            </span>
-                            <h2 className="plan-title">Your Learning<br />Journey</h2>
-                            <p className="plan-desc">
-                                From zero to conversational fluency — structured phases
-                                designed for busy professionals.
-                            </p>
+                {/* Right — Login Card (Now Centered) */}
+                <div className="login-card" style={{ animationDelay: "0.2s", width: "100%" }}>
+                    <div className="login-card-glow" />
+                    <div className="login-card-inner">
+                        <div className="login-card-header" style={{ textAlign: "center" }}>
+                            <h2>Welcome Back</h2>
+                            <p>Sign in to continue your progress</p>
                         </div>
 
-                        <div className="plan-phases">
-                            {PHASES.map((phase, i) => (
-                                <div
-                                    className="plan-phase-row"
-                                    key={phase.id}
-                                    style={{ animationDelay: `${0.3 + i * 0.1}s` }}
-                                >
-                                    <div className="phase-number" style={{ background: phase.gradient }}>
-                                        {phase.id}
-                                    </div>
-                                    <div className="phase-content">
-                                        <div className="phase-top-row">
-                                            <h3>{phase.emoji} {phase.title}</h3>
-                                            <span className="phase-days-pill">{phase.days}</span>
-                                        </div>
-                                        <p>{phase.subtitle}</p>
-                                        <div className="phase-tags">
-                                            {phase.weeks.slice(0, 2).map((w) => (
-                                                <span className="phase-tag" key={w.week}>
-                                                    Wk {w.week}: {w.title}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
+                        <form className="login-form" onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="email">Email Address</label>
+                                <div className="input-wrapper">
+                                    <span className="input-icon">✉️</span>
+                                    <input
+                                        id="email"
+                                        type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="sam@sammitchelldesign.com"
+                                        required
+                                        autoComplete="email"
+                                    />
                                 </div>
-                            ))}
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <div className="input-wrapper">
+                                    <span className="input-icon">🔒</span>
+                                    <input
+                                        id="password"
+                                        type="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder="Enter your password"
+                                        required
+                                        autoComplete="current-password"
+                                    />
+                                </div>
+                            </div>
+
+                            {error && <div className="login-error">{error}</div>}
+
+                            <button
+                                type="submit"
+                                className={`login-btn ${loading ? "loading" : ""}`}
+                                disabled={loading}
+                            >
+                                {loading ? (
+                                    <span className="btn-loading">
+                                        <span className="spinner" />
+                                        Signing in...
+                                    </span>
+                                ) : (
+                                    "Sign In →"
+                                )}
+                            </button>
+                        </form>
+
+                        <div className="login-divider">
+                            <span>Demo Access</span>
                         </div>
 
-                        <div className="plan-stats-row">
-                            <div className="plan-stat">
-                                <span className="plan-stat-val">12</span>
-                                <span className="plan-stat-label">Weeks</span>
+                        <div className="login-hint">
+                            <div className="hint-row">
+                                <span className="hint-label">Email</span>
+                                <code>sam@sammitchelldesign.com</code>
                             </div>
-                            <div className="plan-stat-divider" />
-                            <div className="plan-stat">
-                                <span className="plan-stat-val">500+</span>
-                                <span className="plan-stat-label">Vocab Words</span>
-                            </div>
-                            <div className="plan-stat-divider" />
-                            <div className="plan-stat">
-                                <span className="plan-stat-val">3</span>
-                                <span className="plan-stat-label">Phases</span>
-                            </div>
-                            <div className="plan-stat-divider" />
-                            <div className="plan-stat">
-                                <span className="plan-stat-val">45</span>
-                                <span className="plan-stat-label">Min/Day</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right — Login Card */}
-                    <div className="login-card" style={{ animationDelay: "0.3s" }}>
-                        <div className="login-card-glow" />
-                        <div className="login-card-inner">
-                            <div className="login-card-header">
-                                <h2>Welcome Back</h2>
-                                <p>Sign in to continue your progress</p>
-                            </div>
-
-                            <form className="login-form" onSubmit={handleSubmit}>
-                                <div className="form-group">
-                                    <label htmlFor="email">Email Address</label>
-                                    <div className="input-wrapper">
-                                        <span className="input-icon">✉️</span>
-                                        <input
-                                            id="email"
-                                            type="email"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="sam@sammitchelldesign.com"
-                                            required
-                                            autoComplete="email"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="form-group">
-                                    <label htmlFor="password">Password</label>
-                                    <div className="input-wrapper">
-                                        <span className="input-icon">🔒</span>
-                                        <input
-                                            id="password"
-                                            type="password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            placeholder="Enter your password"
-                                            required
-                                            autoComplete="current-password"
-                                        />
-                                    </div>
-                                </div>
-
-                                {error && <div className="login-error">{error}</div>}
-
-                                <button
-                                    type="submit"
-                                    className={`login-btn ${loading ? "loading" : ""}`}
-                                    disabled={loading}
-                                >
-                                    {loading ? (
-                                        <span className="btn-loading">
-                                            <span className="spinner" />
-                                            Signing in...
-                                        </span>
-                                    ) : (
-                                        "Sign In →"
-                                    )}
-                                </button>
-                            </form>
-
-                            <div className="login-divider">
-                                <span>Demo Access</span>
-                            </div>
-
-                            <div className="login-hint">
-                                <div className="hint-row">
-                                    <span className="hint-label">Email</span>
-                                    <code>sam@sammitchelldesign.com</code>
-                                </div>
-                                <div className="hint-row">
-                                    <span className="hint-label">Password</span>
-                                    <code>hola2026</code>
-                                </div>
+                            <div className="hint-row">
+                                <span className="hint-label">Password</span>
+                                <code>hola2026</code>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {/* Bottom — Powered by */}
-                <div className="login-footer" style={{ animationDelay: "0.5s" }}>
+                <div className="login-footer" style={{ animationDelay: "0.4s", marginTop: "var(--space-2xl)", textAlign: "center" }}>
                     <span>Powered by</span>
                     <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer">
                         📓 NotebookLM
