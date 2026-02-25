@@ -8,6 +8,7 @@ import {
     PHASES, getCurrentPhase, getWeekNumber, MOTIVATIONAL_QUOTES,
 } from "../data/learningPlan";
 import DailyLogModal from "./DailyLogModal";
+import HabitTracker from "./HabitTracker";
 
 export default function Dashboard({ dailyData, onLogDay, onLogout }) {
     const [showLogModal, setShowLogModal] = useState(false);
@@ -166,6 +167,13 @@ export default function Dashboard({ dailyData, onLogDay, onLogout }) {
                         </div>
                     </div>
                 </div>
+
+                {/* ========== HABIT TRACKER — FRONT & CENTER ========== */}
+                <HabitTracker
+                    currentDay={currentDay}
+                    currentPhase={currentPhase}
+                    currentWeek={currentWeek}
+                />
 
                 {/* Phase Cards */}
                 <div className="section-header">
