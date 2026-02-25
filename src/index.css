@@ -591,42 +591,6 @@ body {
   box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
 }
 
-@keyframes gradientShift {
-
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.login-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%);
-  background-size: 250% 250%;
-  animation: shimmer 3s ease infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 100% 100%;
-  }
-
-  100% {
-    background-position: -100% -100%;
-  }
-}
-
-.login-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(99, 102, 241, 0.35), 0 0 0 1px rgba(99, 102, 241, 0.2);
-}
-
 .login-btn:active {
   transform: translateY(0);
 }
@@ -830,13 +794,14 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
-  padding: var(--space-md) var(--space-xl);
   background: rgba(10, 10, 15, 0.85);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
 }
 
 .nav-left {
@@ -943,9 +908,9 @@ body {
 .dashboard-content {
   position: relative;
   z-index: 1;
-  max-width: 1400px;
+  max-width: 1150px;
   margin: 0 auto;
-  padding: var(--space-xl);
+  padding: var(--space-2xl) var(--space-xl);
 }
 
 /* Hero Stats Bar */
@@ -958,11 +923,11 @@ body {
 
 .hero-stat-card {
   padding: var(--space-lg);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(30, 30, 42, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
   border-radius: var(--radius-lg);
   transition: all var(--transition-base);
   position: relative;
@@ -1040,11 +1005,11 @@ body {
 
 /* Card Base */
 .card {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(30, 30, 42, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
   transition: all var(--transition-base);
@@ -1074,11 +1039,11 @@ body {
 }
 
 .phase-card {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(30, 30, 42, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
   position: relative;
@@ -1177,11 +1142,11 @@ body {
    ============================================ */
 
 .habit-tracker {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(30, 30, 42, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
   margin-bottom: var(--space-xl);
